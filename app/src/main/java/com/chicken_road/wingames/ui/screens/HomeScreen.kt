@@ -1,7 +1,8 @@
 package com.chicken_road.wingames.ui.screens
 
+import android.app.Activity
+import android.content.pm.ActivityInfo
 import androidx.activity.compose.BackHandler
-import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,16 +18,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.chicken_road.wingames.navigation.ScreenRoutes
 import com.chicken_road.wingames.ui.custom.Background
 import com.chicken_road.wingames.ui.theme.GreenBtn
+import com.chicken_road.wingames.util.lockOrientation
 
 @Composable
 fun HomeScreen(navController: NavController, paddingValues: PaddingValues) {
 
-    val activity = LocalActivity.current
+
+    val context = LocalContext.current
+    val activity = context as? Activity
+    activity?.lockOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     BackHandler {}
     Box(
         modifier = Modifier

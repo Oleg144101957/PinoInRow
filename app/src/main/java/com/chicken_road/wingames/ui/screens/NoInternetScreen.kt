@@ -60,7 +60,7 @@ fun NoInternetScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             DefaultButton(
-                text = "Try Again",
+                text = "Next",
                 modifier = Modifier.fillMaxWidth(0.8f)
             ) {
                 navController.navigate(ScreenRoutes.HomeScreen.route)

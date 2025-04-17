@@ -1,5 +1,7 @@
 package com.fallsview.slotttts.game.ui.screens
 
+import android.app.Activity
+import android.content.pm.ActivityInfo
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -31,10 +34,14 @@ import com.chicken_road.wingames.ui.custom.Background
 import com.chicken_road.wingames.ui.custom.DefaultIconButton
 import com.chicken_road.wingames.ui.theme.DefCorner
 import com.chicken_road.wingames.ui.theme.DefFont
+import com.chicken_road.wingames.util.lockOrientation
 
 @Composable
 fun AboutScreen(navController: NavController, paddingValues: PaddingValues) {
     BackHandler {}
+    val context = LocalContext.current
+    val activity = context as? Activity
+    activity?.lockOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     Box(
         modifier = Modifier
             .fillMaxSize()

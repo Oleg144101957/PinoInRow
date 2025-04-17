@@ -1,5 +1,7 @@
 package com.chicken_road.wingames.ui.screens
 
+import android.app.Activity
+import android.content.pm.ActivityInfo
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -32,11 +33,14 @@ import com.chicken_road.wingames.ui.custom.DefaultButton
 import com.chicken_road.wingames.ui.custom.DefaultIconButton
 import com.chicken_road.wingames.ui.theme.DefFont
 import com.chicken_road.wingames.util.CustomTabsUtil
+import com.chicken_road.wingames.util.lockOrientation
 
 @Composable
 fun SettingsScreen(navController: NavController, paddingValues: PaddingValues) {
-    val uriHandler = LocalUriHandler.current
     val context = LocalContext.current
+    val activity = context as? Activity
+    activity?.lockOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+
     BackHandler {}
     Box(
         modifier = Modifier

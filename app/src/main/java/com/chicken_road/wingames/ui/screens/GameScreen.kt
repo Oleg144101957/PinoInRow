@@ -1,5 +1,7 @@
 package com.chicken_road.wingames.ui.screens
 
+import android.app.Activity
+import android.content.pm.ActivityInfo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -30,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
@@ -39,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.chicken_road.wingames.R
 import com.chicken_road.wingames.ui.theme.GreenBtn
+import com.chicken_road.wingames.util.lockOrientation
 import kotlinx.coroutines.delay
 import kotlin.random.Random
 
@@ -48,6 +52,9 @@ fun GameScreen(navController: NavController) {
     val chickenStep = 50f
     val chickenRadius = 25f
     val baseCarSpeed = 10f
+    val context = LocalContext.current
+    val activity = context as? Activity
+    activity?.lockOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
     var canvasSize by remember { mutableStateOf(IntSize.Zero) }
     var chickenX by remember { mutableStateOf(0f) }

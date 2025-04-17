@@ -8,6 +8,7 @@ sealed class ScreenRoutes(val route: String) {
     data object AboutScreen : ScreenRoutes(ABOUT_SCREEN)
     data object NoNetworkScreen : ScreenRoutes(NO_NETWORK_SCREEN)
     data object GameScreen : ScreenRoutes(GAME_SCREEN)
+    data object ContentScreen : ScreenRoutes(CONTENT_SCREEN)
 
     companion object {
         private const val SPLASH_SCREEN = "Splash_Screen"
@@ -16,5 +17,6 @@ sealed class ScreenRoutes(val route: String) {
         private const val ABOUT_SCREEN = "About_Screen"
         private const val NO_NETWORK_SCREEN = "No_Network_Screen"
         private const val GAME_SCREEN = "Game_Screen"
+        private const val CONTENT_SCREEN = "Content_Screen"
     }
 }
