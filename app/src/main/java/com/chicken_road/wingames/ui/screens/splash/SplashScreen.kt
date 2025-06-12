@@ -13,15 +13,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.chicken_road.wingames.R
@@ -29,6 +35,7 @@ import com.chicken_road.wingames.domain.LoadingState
 import com.chicken_road.wingames.navigation.ScreenRoutes
 import com.chicken_road.wingames.ui.custom.Background
 import com.chicken_road.wingames.util.lockOrientation
+import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
@@ -56,7 +63,11 @@ fun SplashScreen(
             }
 
             is LoadingState.ContentState -> {
-                navController.navigate(ScreenRoutes.ContentScreen.route)
+//                val url = URLEncoder.encode(state.url, StandardCharsets.UTF_8.toString())
+//                val route = "${ScreenRoutes.ContentScreen.route}/$url"
+//                navController.navigate(route)
+                delay(1500)
+                navController.navigate(ScreenRoutes.HomeScreen.route)
             }
         }
     }
@@ -69,12 +80,19 @@ fun SplashScreen(
                 .padding(16.dp)
         ) {
             Spacer(modifier = Modifier.height(64.dp))
+
+            Text(
+                stringResource(R.string.app_name),
+                modifier = Modifier.fillMaxWidth(),
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+                fontSize = 36.sp, textAlign = TextAlign.Center
+            )
             Image(
                 painterResource(R.drawable.logo),
                 contentDescription = R.drawable.logo.toString(),
                 modifier = Modifier
-                    .align(Alignment.Center)
-                    .fillMaxWidth(),
+                    .align(Alignment.Center),
                 contentScale = ContentScale.FillBounds
             )
             Column(

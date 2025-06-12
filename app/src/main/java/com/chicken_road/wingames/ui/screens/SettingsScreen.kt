@@ -29,8 +29,7 @@ import androidx.navigation.NavController
 import com.chicken_road.wingames.R
 import com.chicken_road.wingames.navigation.ScreenRoutes
 import com.chicken_road.wingames.ui.custom.Background
-import com.chicken_road.wingames.ui.custom.DefaultButton
-import com.chicken_road.wingames.ui.custom.DefaultIconButton
+import com.chicken_road.wingames.ui.custom.MenuButton
 import com.chicken_road.wingames.ui.theme.DefFont
 import com.chicken_road.wingames.util.CustomTabsUtil
 import com.chicken_road.wingames.util.lockOrientation
@@ -59,7 +58,7 @@ fun SettingsScreen(navController: NavController, paddingValues: PaddingValues) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                DefaultIconButton(R.drawable.ic_back) {
+                MenuButton(R.drawable.ic_back, modifier = Modifier.size(50.dp)) {
                     navController.popBackStack()
                 }
                 Text(
@@ -81,7 +80,7 @@ fun SettingsScreen(navController: NavController, paddingValues: PaddingValues) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                DefaultButton(
+                MenuButton(
                     "Privacy Policy",
                     modifier = Modifier.fillMaxWidth(0.8f)
                 ) {
@@ -91,7 +90,7 @@ fun SettingsScreen(navController: NavController, paddingValues: PaddingValues) {
                     )
                 }
                 Spacer(modifier = Modifier.height(16.dp))
-                DefaultButton(
+                MenuButton(
                     "About Us",
                     modifier = Modifier.fillMaxWidth(0.8f)
                 ) {

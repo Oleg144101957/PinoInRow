@@ -32,6 +32,7 @@ import androidx.navigation.NavController
 import com.chicken_road.wingames.R
 import com.chicken_road.wingames.ui.custom.Background
 import com.chicken_road.wingames.ui.custom.DefaultIconButton
+import com.chicken_road.wingames.ui.custom.MenuButton
 import com.chicken_road.wingames.ui.theme.DefCorner
 import com.chicken_road.wingames.ui.theme.DefFont
 import com.chicken_road.wingames.util.lockOrientation
@@ -58,7 +59,7 @@ fun AboutScreen(navController: NavController, paddingValues: PaddingValues) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                DefaultIconButton(R.drawable.ic_back) {
+                MenuButton(R.drawable.ic_back, modifier = Modifier.size(50.dp)) {
                     navController.popBackStack()
                 }
                 Text(

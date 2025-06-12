@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Chicken Road Story</string>
+    <string name="app_name">Big Bass Bonanza</string>
     <string name="about_text">
-    Chicken Road Story is a fast-paced arcade game where you guide a brave chicken dodging oncoming cars! 🚗💨
-    The longer you survive, the faster and denser the traffic becomes. Test your reflexes and stay alive as long as possible!
+Big Bass Bonanza is a fun and addictive game where you catch fish or shrimp! 🎣🦐
+Move your net to catch as many as you can while avoiding misses. The game ends when you lose all 3 lives. How many can you catch before it\'s over?
 </string>
+
 </resources>

@@ -21,70 +21,55 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import com.chicken_road.wingames.MainActivity
+import com.chicken_road.wingames.R
+import com.chicken_road.wingames.domain.GameType
 import com.chicken_road.wingames.navigation.ScreenRoutes
 import com.chicken_road.wingames.ui.custom.Background
+import com.chicken_road.wingames.ui.custom.MenuButton
 import com.chicken_road.wingames.ui.theme.GreenBtn
 import com.chicken_road.wingames.util.lockOrientation
 
 @Composable
-fun HomeScreen(navController: NavController, paddingValues: PaddingValues) {
-
-
+fun HomeScreen(navController: NavHostController, innerPadding: PaddingValues) {
+    BackHandler { }
     val context = LocalContext.current
-    val activity = context as? Activity
+    val activity = context as? MainActivity
     activity?.lockOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-    BackHandler {}
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(paddingValues)
+            .padding(innerPadding),
+        contentAlignment = Alignment.Center
     ) {
         Background()
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Button(
-                onClick = {
-                    navController.navigate(ScreenRoutes.GameScreen.route)
-                },
-                modifier = Modifier.fillMaxWidth(0.5f),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = GreenBtn
-                )
-            ) {
-                Text("Play")
-            }
+        Menu(navController, activity)
+    }
+}
 
-            Spacer(modifier = Modifier.height(32.dp))
-
-            Button(
-                onClick = {
-                    navController.navigate(ScreenRoutes.SettingsScreen.route)
-                },
-                modifier = Modifier.fillMaxWidth(0.5f),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = GreenBtn
-                )
-            ) {
-                Text("Settings")
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(
-                onClick = {
-                    activity?.finish()
-                },
-                modifier = Modifier.fillMaxWidth(0.5f),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = GreenBtn
-                )
-            ) {
-                Text("Exit")
-            }
+@Composable
+fun Menu(navController: NavHostController, activity: MainActivity?) {
+    Column(
+        Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        MenuButton("Fish Hunt", modifier = Modifier) {
+            navController.navigate("${ScreenRoutes.GameScreen.route}/${GameType.FISH}")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        MenuButton("Shrimp Hunt", modifier = Modifier) {
+            navController.navigate("${ScreenRoutes.GameScreen.route}/${GameType.SHRIMP}")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        MenuButton("Settings", modifier = Modifier) {
+            navController.navigate(ScreenRoutes.SettingsScreen.route)
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        MenuButton("Exit", modifier = Modifier) {
+            activity?.finish()
         }
     }
 }
