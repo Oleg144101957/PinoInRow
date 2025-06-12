@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.chicken_road.wingames"
+    namespace = "com.bi.gbass.tech"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.chicken_road.wingames"
+        applicationId = "com.bi.gbass.tech"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -66,4 +66,7 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     implementation(libs.androidx.browser)
+
+
+
 }
