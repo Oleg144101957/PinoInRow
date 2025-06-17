@@ -1,25 +1,42 @@
 package com.bi.gbass.tech.util.web
 
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.webkit.CookieManager
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.net.toUri
+import androidx.lifecycle.lifecycleScope
 import com.bi.gbass.tech.MainActivity
+import com.bi.gbass.tech.data.DataStoreRepositoryImpl
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainWebViewClient(
     private val activity: MainActivity,
-    private val onWhite: () -> Unit
+    private val onWhite: () -> Unit,
+    private val showWeb: () -> Unit
 ) : WebViewClient() {
 
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
         Log.d("123123", "Main WebView Parent URL is $url")
         CookieManager.getInstance().flush()
-        if (url?.contains("r7z8KkNQ") == true) {
+        if (url?.contains("41pVT5") == true) {
+            activity.lifecycleScope.launch {
+                delay(1500)
+            }
             onWhite.invoke()
+        } else {
+            val dataStore = DataStoreRepositoryImpl(activity)
+            dataStore.saveUrl(url.toString())
+            dataStore.saveAdb(false)
+        }
+        activity.lifecycleScope.launch {
+            delay(1500)
+            showWeb.invoke()
         }
     }
 

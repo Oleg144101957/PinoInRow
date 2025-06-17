@@ -28,7 +28,20 @@ class DataStoreRepositoryImpl @Inject constructor(private val context: Context) 
         return pref.getFloat(SPEED, 5f)
     }
 
+    override fun saveAdb(adb: Boolean) {
+        pref.edit { putBoolean(ADB, adb) }
+    }
+
+    override fun getAdb(): Boolean? {
+        return if (pref.contains(ADB)) {
+            pref.getBoolean(ADB, false)
+        } else {
+            null
+        }
+    }
+
     companion object {
+        const val ADB = "ADB"
         private const val SHARED_PREF_NAME = "USER STORAGE BY SHARED PREFERENCES"
         private const val GOAL = "GOAL"
         private const val EMPTY = "EMPTY"

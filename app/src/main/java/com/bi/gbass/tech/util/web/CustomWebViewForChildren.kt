@@ -2,6 +2,7 @@ package com.bi.gbass.tech.util.web
 
 
 import android.annotation.SuppressLint
+import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.webkit.CookieManager
@@ -21,33 +22,37 @@ class CustomWebViewForChildren(
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         webViewClient = WebViewClientForChildren(parentWebView, this)
-        settings.databaseEnabled = true
-        settings.javaScriptEnabled = true
-        settings.domStorageEnabled = true
-        settings.useWideViewPort = true
-        settings.allowContentAccess = true
-        settings.allowFileAccess = true
 
+        with(settings) {
+            databaseEnabled = true
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            javaScriptCanOpenWindowsAutomatically = true
+            setSupportMultipleWindows(true)
+            allowContentAccess = true
+            allowFileAccess = true
+            useWideViewPort = true
+            builtInZoomControls = false
+            displayZoomControls = false
+            setSupportZoom(true)
+            loadWithOverviewMode = true
+            loadsImagesAutomatically = true
+            defaultTextEncodingName = "UTF-8"
+            cacheMode = WebSettings.LOAD_DEFAULT
+            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            userAgentString = userAgentString.agentChanger()
+        }
 
-        settings.builtInZoomControls = false
-        settings.displayZoomControls = true
-        settings.javaScriptCanOpenWindowsAutomatically = true
-        settings.setSupportMultipleWindows(true)
-        settings.setSupportZoom(true)
+        setLayerType(View.LAYER_TYPE_HARDWARE, null)
 
-        requestFocus()
-        settings.defaultTextEncodingName = "UTF-8"
-        settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
-        isVerticalScrollBarEnabled = true
-        isHorizontalScrollBarEnabled = true
-        settings.userAgentString = settings.userAgentString.agentChanger()
+        isVerticalScrollBarEnabled = false
+        isHorizontalScrollBarEnabled = false
+
         CookieManager.getInstance().setAcceptThirdPartyCookies(this, true)
         CookieManager.getInstance().setAcceptCookie(true)
     }
 
-
     private fun String.agentChanger(): String {
         return this.replace("wv", " ")
     }
-
 }

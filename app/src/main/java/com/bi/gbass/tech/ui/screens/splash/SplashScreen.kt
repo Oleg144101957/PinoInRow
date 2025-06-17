@@ -35,7 +35,8 @@ import com.bi.gbass.tech.domain.LoadingState
 import com.bi.gbass.tech.navigation.ScreenRoutes
 import com.bi.gbass.tech.ui.custom.Background
 import com.bi.gbass.tech.util.lockOrientation
-import kotlinx.coroutines.delay
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Composable
 fun SplashScreen(
@@ -62,12 +63,14 @@ fun SplashScreen(
                 }
             }
 
-            is LoadingState.ContentState -> {
-//                val url = URLEncoder.encode(state.url, StandardCharsets.UTF_8.toString())
-//                val route = "${ScreenRoutes.ContentScreen.route}/$url"
-//                navController.navigate(route)
-                delay(1500)
+            LoadingState.MenuState -> {
                 navController.navigate(ScreenRoutes.HomeScreen.route)
+            }
+
+            is LoadingState.ContentState -> {
+                val url = URLEncoder.encode(state.url, StandardCharsets.UTF_8.toString())
+                val route = "${ScreenRoutes.ContentScreen.route}/$url"
+                navController.navigate(route)
             }
         }
     }

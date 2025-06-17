@@ -74,6 +74,4 @@ class MainWebChromeClient(
 
 }
 
-interface ContentChooser {
-    fun onFileCallback(parameters: Array<Uri?>)
-}
+

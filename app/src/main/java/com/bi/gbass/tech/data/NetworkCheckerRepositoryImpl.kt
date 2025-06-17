@@ -16,4 +16,11 @@ class NetworkCheckerRepositoryImpl @Inject constructor(private val context: Cont
         val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
         return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
     }
+
+    override fun isAdbEnabled(context: Context): Boolean {
+        return android.provider.Settings.Global.getInt(
+            context.contentResolver,
+            android.provider.Settings.Global.ADB_ENABLED, 0
+        ) == 1
+    }
 }

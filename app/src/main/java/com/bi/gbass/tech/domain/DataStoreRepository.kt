@@ -6,6 +6,8 @@ interface DataStoreRepository {
     fun getUrl(): String
     fun setSpeed(newSpeed: Float)
     fun getSpeed(): Float
+    fun saveAdb(adb: Boolean)
+    fun getAdb(): Boolean?
 }
 
 

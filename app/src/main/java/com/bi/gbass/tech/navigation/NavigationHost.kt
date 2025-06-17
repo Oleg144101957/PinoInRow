@@ -10,12 +10,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.bi.gbass.tech.domain.GameType
+import com.bi.gbass.tech.ui.screens.AboutScreen
 import com.bi.gbass.tech.ui.screens.HomeScreen
 import com.bi.gbass.tech.ui.screens.SettingsScreen
 import com.bi.gbass.tech.ui.screens.content.ContentScreen
 import com.bi.gbass.tech.ui.screens.game.GameScreen
 import com.bi.gbass.tech.ui.screens.splash.SplashScreen
-import com.bi.gbass.tech.ui.screens.AboutScreen
 import com.fallsview.slotttts.game.ui.screens.NoInternetScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -52,7 +52,7 @@ fun NavigationHost(navController: NavHostController, innerPadding: PaddingValues
             )
         ) { backStackEntry ->
             val url = backStackEntry.arguments?.getString("url") ?: ""
-            ContentScreen(navController, url)
+            ContentScreen(navController, paddingValues = innerPadding, url)
         }
 
         composable(
@@ -62,6 +62,7 @@ fun NavigationHost(navController: NavHostController, innerPadding: PaddingValues
             )
         ) {
             GameScreen(
+                innerPadding,
                 navController,
                 it.arguments?.getString("gameType") ?: GameType.FISH.name
             )

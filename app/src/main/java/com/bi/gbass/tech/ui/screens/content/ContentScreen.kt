@@ -3,21 +3,26 @@ package com.bi.gbass.tech.ui.screens.content
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Build
+import android.view.View
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -34,18 +39,19 @@ import com.bi.gbass.tech.util.web.MainWebChromeClient
 @Composable
 fun ContentScreen(
     navigationController: NavHostController,
+    paddingValues: PaddingValues,
     url: String
 ) {
+    val isWebViewVisible = remember { mutableStateOf(false) }
     val context = LocalContext.current
-    val onWhite = remember {
-        mutableStateOf(false)
-    }
-
     val activity = context as MainActivity
     activity.lockOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+
     val webView = remember { mutableStateOf<MainCustomWebView?>(null) }
     val destination = remember { mutableStateOf(url) }
     val networkChecker = NetworkCheckerRepositoryImpl(context)
+
+    // File chooser launcher
     val fileChooserLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetMultipleContents()
     ) { uris: List<Uri> ->
@@ -54,14 +60,13 @@ fun ContentScreen(
         }
     }
 
+    // Обработчик кнопки назад
     BackHandler {
         webView.value?.let {
             val child = it.getChildAt(0)
             if (child != null) {
-                //we need to close child
                 it.removeView(child)
             } else {
-                //we don't have child WebView
                 if (it.canGoBack()) {
                     it.goBack()
                 }
@@ -69,37 +74,52 @@ fun ContentScreen(
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color.Black)
+            .padding(paddingValues)
+    ) {
+        if (!isWebViewVisible.value) {
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                LinearProgressIndicator(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 32.dp),
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
+
         destination.value.let { url ->
             AndroidView(
                 modifier = Modifier
                     .fillMaxSize()
                     .imePadding(),
                 factory = {
-                    MainCustomWebView(activity, fileChooserLauncher, onWhite = {
-                        onWhite.value = true
-                    }).also {
-                        webView.value = it
+                    // создаем экземпляр MainCustomWebView с твоими параметрами
+                    MainCustomWebView(
+                        context = activity,
+                        content = fileChooserLauncher,
+                        onWhite = {
+                            navigationController.navigate(ScreenRoutes.HomeScreen.route)
+                        },
+                        onShowWeb = { isWebViewVisible.value = true }
+                    ).apply {
+                        webView.value = this
+
                         if (networkChecker.isConnectionAvailable()) {
-                            it.loadUrl(url)
+                            loadUrl(url)
                         } else {
                             navigationController.navigate(ScreenRoutes.NoNetworkScreen.route)
                         }
                     }
+                },
+                update = { view ->
+                    view.visibility = if (isWebViewVisible.value) View.VISIBLE else View.INVISIBLE
                 }
             )
         }
-        if (onWhite.value) {
-            Button(
-                onClick = {
-                    navigationController.navigate(ScreenRoutes.HomeScreen.route)
-                },
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(bottom = 64.dp, end = 16.dp)
-            ) {
-                Text(text = "Next")
-            }
-        }
     }
 }
+

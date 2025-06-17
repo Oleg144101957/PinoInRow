@@ -86,7 +86,7 @@ fun SettingsScreen(navController: NavController, paddingValues: PaddingValues) {
                 ) {
                     CustomTabsUtil.openCustomTab(
                         context,
-                        "https://telegra.ph/Privacy-Policy-for-Chicken-Road-Story-04-11"
+                        "https://sites.google.com/view/41pvt5-06-17/41pVT5-06-17"
                     )
                 }
                 Spacer(modifier = Modifier.height(16.dp))

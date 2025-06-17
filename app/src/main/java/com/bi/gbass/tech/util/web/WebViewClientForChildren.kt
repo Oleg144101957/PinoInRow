@@ -14,7 +14,7 @@ class WebViewClientForChildren(
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
 
-        Log.d("123123", "onPageFinished for Children")
+        Log.d("123123", "onPageFinished for Children $url")
 
         val child: View? = parentWebView.getChildAt(0)
 

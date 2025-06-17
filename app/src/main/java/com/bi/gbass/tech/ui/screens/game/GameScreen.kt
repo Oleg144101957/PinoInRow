@@ -1,12 +1,12 @@
 package com.bi.gbass.tech.ui.screens.game
 
-import android.app.Activity
 import android.content.pm.ActivityInfo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,10 +33,12 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.bi.gbass.tech.MainActivity
 import com.bi.gbass.tech.R
 import com.bi.gbass.tech.domain.GameType
 import com.bi.gbass.tech.navigation.ScreenRoutes
@@ -48,40 +50,45 @@ import kotlin.random.Random
 
 @Composable
 fun GameScreen(
+    innerPadding: PaddingValues,
     navController: NavController,
     gameType: String,
     viewModel: GameViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    val activity = context as? Activity
+    val activity = context as? MainActivity
     activity?.lockOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
     var gameOver by remember { mutableStateOf(false) }
-    val game = GameType.valueOf(gameType.uppercase())
+    val game = GameType.valueOf(gameType)
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding()
+            .padding(innerPadding)
     ) {
-        Background(R.drawable.bg_game)
-
+        Background()
         if (gameOver) {
             GameOverScreen(navController = navController)
         } else {
-            val elementDrawable = when (game) {
-                GameType.FISH -> painterResource(id = R.drawable.fish)
-                GameType.SHRIMP -> painterResource(id = R.drawable.shrimp)
-            }
-
-            val heroDrawable = painterResource(id = R.drawable.hero)
-
             Game(
-                speed = viewModel.getSpeed(),
-                elementDrawable = elementDrawable,
-                platformDrawable = heroDrawable,
-                livesPainter = elementDrawable,
-                scoreBg = painterResource(R.drawable.cce_btn)
+                viewModel.getSpeed(),
+                when (game) {
+                    GameType.FISH -> listOf(painterResource(id = R.drawable.fish))
+                    GameType.SHRIMP -> listOf(painterResource(id = R.drawable.shrimp))
+                },
+                when (game) {
+                    GameType.FISH -> painterResource(id = R.drawable.hero)
+                    GameType.SHRIMP -> painterResource(id = R.drawable.hero)
+                },
+                when (game) {
+                    GameType.FISH -> painterResource(R.drawable.fish)
+                    GameType.SHRIMP -> painterResource(R.drawable.shrimp)
+                },
+                when (game) {
+                    GameType.FISH -> painterResource(R.drawable.cce_btn)
+                    GameType.SHRIMP -> painterResource(R.drawable.cce_btn)
+                }
             ) {
                 gameOver = true
             }
@@ -93,7 +100,7 @@ fun GameScreen(
 @Composable
 fun Game(
     speed: Float,
-    elementDrawable: Painter,
+    elementDrawables: List<Painter>,
     platformDrawable: Painter,
     livesPainter: Painter,
     scoreBg: Painter,
@@ -101,7 +108,7 @@ fun Game(
 ) {
     var score by remember { mutableIntStateOf(0) }
     var platformPosition by remember { mutableFloatStateOf(0f) }
-    var lives by remember { mutableIntStateOf(3) }
+    var lives by remember { mutableIntStateOf(3) }  // Track lives
     val fallingElements = remember { mutableStateListOf<FallingElement>() }
 
     val screenWidth = with(LocalDensity.current) { LocalConfiguration.current.screenWidthDp.dp }
@@ -113,7 +120,8 @@ fun Game(
         while (true) {
             delay(1000)
             val randomX = Random.nextFloat() * (screenWidth.value - 80)
-            fallingElements.add(FallingElement(randomX, 0f))
+            val randomDrawable = elementDrawables.random()
+            fallingElements.add(FallingElement(randomX, 0f, randomDrawable))
         }
     }
 
@@ -122,30 +130,26 @@ fun Game(
             delay(16)
             val iterator = fallingElements.iterator()
             while (iterator.hasNext()) {
-                val catchZone = 10
                 val element = iterator.next()
                 val newY = element.y + speed
                 if (newY > screenHeight.value) {
                     iterator.remove()
-                    if (newY + 50 >= screenHeight.value - platformHeight.value) {
+                    if (newY + 80 >= screenHeight.value - platformHeight.value) {
                         lives -= 1
                     }
                     if (lives <= 0) {
                         onGameOver()
                     }
-                } else
-
-                    if (
-                        newY + 50 >= screenHeight.value - platformHeight.value - catchZone &&
-                        newY + 50 <= screenHeight.value - platformHeight.value + catchZone &&
-                        element.x + 50 >= platformPosition &&
-                        element.x <= platformPosition + platformWidth.value
-                    ) {
-                        score += 5
-                        iterator.remove()
-                    } else {
-                        element.y = newY
-                    }
+                } else if (
+                    newY + 80 >= screenHeight.value - platformHeight.value &&
+                    element.x >= platformPosition &&
+                    element.x <= platformPosition + platformWidth.value
+                ) {
+                    score += 5
+                    iterator.remove()
+                } else {
+                    fallingElements[fallingElements.indexOf(element)] = element.copy(y = newY)
+                }
             }
         }
     }
@@ -164,35 +168,34 @@ fun Game(
     ) {
         fallingElements.forEach { element ->
             Image(
-                painter = elementDrawable,
-                contentDescription = null,
-                contentScale = ContentScale.FillBounds,
+                painter = element.drawable,
+                contentDescription = "Falling Element",
                 modifier = Modifier
                     .offset(element.x.dp, element.y.dp)
                     .size(50.dp)
             )
         }
-
+        // Platform
         Image(
             painter = platformDrawable,
-            contentDescription = null,
-            contentScale = ContentScale.FillBounds,
+            contentDescription = "Platform",
+            contentScale = ContentScale.FillHeight,
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .offset(x = platformPosition.dp)
                 .size(platformWidth, platformHeight)
         )
-
-        // Панель очков и жизней
         Row(
             Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Box(contentAlignment = Alignment.Center) {
+            Box(
+                contentAlignment = Alignment.Center
+            ) {
                 Image(
                     scoreBg,
-                    null,
+                    scoreBg.toString(),
                     modifier = Modifier.fillMaxWidth(0.25f),
                     contentScale = ContentScale.FillWidth
                 )
@@ -204,6 +207,16 @@ fun Game(
                         .align(Alignment.CenterEnd)
                         .padding(16.dp)
                 )
+                // Display "Game Over" message if lives are 0
+                if (lives <= 0) {
+                    Text(
+                        text = "Game Over!",
+                        color = Color.White,
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
             }
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -212,7 +225,7 @@ fun Game(
                 repeat(lives) {
                     Image(
                         painter = livesPainter,
-                        contentDescription = null,
+                        contentDescription = livesPainter.toString(),
                         modifier = Modifier.size(40.dp)
                     )
                 }
@@ -249,10 +262,10 @@ fun GameOverScreen(navController: NavController) {
     }
 }
 
-
-class FallingElement(
+data class FallingElement(
     val x: Float,
-    var y: Float
+    val y: Float,
+    val drawable: Painter
 )
 
 
