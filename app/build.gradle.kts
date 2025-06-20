@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.bi.gbass.tech"
+    namespace = "com.bon.sugar.sweet"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.bi.gbass.tech"
+        applicationId = "com.bon.sugar.sweet"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -66,7 +66,10 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     implementation(libs.androidx.browser)
-
+    implementation("com.google.android.gms:play-services-ads-identifier:18.1.0")
+    implementation("com.onesignal:OneSignal:4.8.10")
+    implementation ("com.appsflyer:af-android-sdk:6.15.2")
+    implementation("com.android.installreferrer:installreferrer:2.2")
 
 
 }
