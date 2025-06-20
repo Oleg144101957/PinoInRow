@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.bon.sugar.sweet"
+    namespace = "com.bon.mob.sweet"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.bon.sugar.sweet"
+        applicationId = "com.bon.mob.sweet"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">Sugar Bonanza</string>
+    <string name="app_name">Sweet Bonanza Mobile</string>
     <string name="about_text">
-Sugar Bonanza is a fun and addictive game where your goal is to catch as many candies as possible! 🍬🍭
-Move your basket, grab the falling sweets, and try not to miss — you only have 3 lives. See how many candies you can collect before the game ends!
+Sweet Bonanza Mobile is an exciting and addictive game where you collect falling candies! 🍬🍭
+Move your basket, catch as many sweets as you can, and don’t miss — you only have 3 lives. See how many candies you can grab before the game is over!
 </string>
+
 
 
 </resources>
