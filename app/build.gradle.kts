@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.cat.cher.oma"
+    namespace = "com.boo.me.ran.g"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.cat.cher.oma"
+        applicationId = "com.boo.me.ran.g"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

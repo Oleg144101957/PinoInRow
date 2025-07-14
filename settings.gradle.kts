@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Fruit Catcher Oma"
+rootProject.name = "Boomerang Catcher"
 include(":app")
