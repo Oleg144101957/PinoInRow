@@ -73,7 +73,7 @@ fun GameScreen(
                 speed = viewModel.getSpeed(),
                 elementDrawable = painterResource(id = R.drawable.candy),
                 platformDrawable = painterResource(id = R.drawable.hero),
-                livesPainter = painterResource(id = R.drawable.candy),
+                livesPainter = painterResource(id = R.drawable.heart),
                 scoreBg = painterResource(id = R.drawable.cce_btn)
             ) {
                 gameOver = true
