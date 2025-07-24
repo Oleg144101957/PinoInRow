@@ -1,10 +1,8 @@
 <resources>
-    <string name="app_name">Boomerang Catcher</string>
+    <string name="app_name">ZeuGam11</string>
     <string name="about_text">
-Boomerang Catcher is a fun and addictive game where you catch falling boomerangs! 🪃
-Move your basket, catch as many as you can, and be careful — you only have 3 lives. How many boomerangs can you catch before the game is over?
+Control the mighty Zeus and catch falling lightning bolts! ⚡
+Move across the sky, collect as many bolts as you can, and don’t miss — you only have 3 lives.
+Test your reflexes and become the true god of thunder!
 </string>
-
-
-
 </resources>

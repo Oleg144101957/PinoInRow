@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "228969002148",
+    "project_id": "zeugam11",
+    "storage_bucket": "zeugam11.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228969002148:android:9dd2042e0942ea7b8c6231",
+        "android_client_info": {
+          "package_name": "com.ze.us.ga.m"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1xi5ewWB3Q4wFC3Hk_wHFGGYvkrAMH64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

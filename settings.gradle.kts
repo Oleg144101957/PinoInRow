@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Boomerang Catcher"
+rootProject.name = "ZeuGam11"
 include(":app")

@@ -4,14 +4,16 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    id("com.google.gms.google-services")
+
 }
 
 android {
-    namespace = "com.boo.me.ran.g"
+    namespace = "com.ze.us.ga.m"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.boo.me.ran.g"
+        applicationId = "com.ze.us.ga.m"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -71,5 +73,6 @@ dependencies {
     implementation ("com.appsflyer:af-android-sdk:6.15.2")
     implementation("com.android.installreferrer:installreferrer:2.2")
 
+    implementation("com.google.firebase:firebase-database-ktx:21.0.0")
 
 }
