@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ZeuGam11"
+rootProject.name = "Plnko Collection"
 include(":app")

@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.ze.us.ga.m"
+    namespace = "com.pl.nk.col.lec"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.ze.us.ga.m"
+        applicationId = "com.pl.nk.col.lec"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
