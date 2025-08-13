@@ -14,10 +14,10 @@ import com.pl.nk.col.lec.ui.screens.AboutScreen
 import com.pl.nk.col.lec.ui.screens.HomeScreen
 import com.pl.nk.col.lec.ui.screens.SettingsScreen
 import com.pl.nk.col.lec.ui.screens.content.ContentScreen
-import com.pl.nk.col.lec.ui.screens.game.GameScreen
 import com.pl.nk.col.lec.ui.screens.info.InfoScreen
 import com.pl.nk.col.lec.ui.screens.plnko.PlnkoScreen
 import com.pl.nk.col.lec.ui.screens.splash.SplashScreen
+import com.pl.nk.col.lec.ui.screens.threeinrow.ThreeInRowScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -34,6 +34,10 @@ fun NavigationHost(navController: NavHostController, innerPadding: PaddingValues
 
         composable(route = ScreenRoutes.SettingsScreen.route) {
             SettingsScreen(navController, innerPadding)
+        }
+
+        composable(route = ScreenRoutes.ThreeInRow.route) {
+            ThreeInRowScreen()
         }
 
         composable(route = ScreenRoutes.PlnkoScreen.route) {
@@ -64,8 +68,5 @@ fun NavigationHost(navController: NavHostController, innerPadding: PaddingValues
             ContentScreen(navController, paddingValues = innerPadding, url)
         }
 
-        composable(route = ScreenRoutes.GameScreen.route) {
-            GameScreen(navController = navController, innerPadding = innerPadding)
-        }
     }
 }

@@ -47,7 +47,7 @@ fun AboutScreen(navController: NavController, paddingValues: PaddingValues) {
             .fillMaxSize()
             .padding(paddingValues)
     ) {
-        Background()
+        Background(R.drawable.bg)
         Column(
             Modifier
                 .fillMaxSize()

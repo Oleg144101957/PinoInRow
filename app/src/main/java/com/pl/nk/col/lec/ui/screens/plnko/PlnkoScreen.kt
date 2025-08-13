@@ -71,7 +71,7 @@ fun PlnkoScreen(navController: NavController, paddingValues: PaddingValues) {
                 }
                 Spacer(Modifier.width(16.dp))
                 IconButton(iconRes = R.drawable.ic_info, modifier = Modifier.size(32.dp)) {
-                    navController.navigate(ScreenRoutes.SettingsScreen.route)
+                    navController.navigate(ScreenRoutes.InfoScreen.route)
                 }
             }
             PlinkoGame()

@@ -5,13 +5,13 @@ import android.content.pm.ActivityInfo
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -20,11 +20,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.pl.nk.col.lec.R
@@ -63,8 +62,7 @@ fun SplashScreen(
     LaunchedEffect(state) {
         when (state) {
             LoadingState.InitState -> {
-                navController.navigate(ScreenRoutes.HomeScreen.route)
-//                viewModel.load(context)
+                viewModel.load(context)
             }
 
             LoadingState.NoNetworkState -> {
@@ -82,18 +80,13 @@ fun SplashScreen(
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Background(R.drawable.bg_game)
+        Background(R.drawable.bg)
         Box(
             Modifier
                 .fillMaxSize()
                 .padding(top = 24.dp), contentAlignment = Alignment.TopCenter
         ) {
-            Text(
-                text = stringResource(R.string.app_name),
-                color = Color.White,
-                fontSize = 36.sp,
-                fontWeight = FontWeight.Bold
-            )
+            Image(painter = painterResource(R.drawable.logo), "logo", modifier = Modifier.fillMaxWidth(), contentScale = ContentScale.FillWidth)
         }
         Box(
             Modifier

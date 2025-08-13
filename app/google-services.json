@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "228969002148",
-    "project_id": "zeugam11",
-    "storage_bucket": "zeugam11.firebasestorage.app"
+    "project_number": "816793996685",
+    "project_id": "plnko-collection",
+    "storage_bucket": "plnko-collection.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:228969002148:android:9dd2042e0942ea7b8c6231",
+        "mobilesdk_app_id": "1:816793996685:android:faa3e3dfb7a12043bb81c4",
         "android_client_info": {
           "package_name": "com.pl.nk.col.lec"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB1xi5ewWB3Q4wFC3Hk_wHFGGYvkrAMH64"
+          "current_key": "AIzaSyBP4Zd1-6Y8xMqSmpuA7a5v8PQqJinpeNc"
         }
       ],
       "services": {

@@ -46,7 +46,7 @@ fun SettingsScreen(navController: NavController, paddingValues: PaddingValues) {
             .fillMaxSize()
             .padding(paddingValues)
     ) {
-        Background()
+        Background(R.drawable.bg)
         Column(
             Modifier
                 .fillMaxSize()
@@ -86,7 +86,7 @@ fun SettingsScreen(navController: NavController, paddingValues: PaddingValues) {
                 ) {
                     CustomTabsUtil.openCustomTab(
                         context,
-                        "https://sites.google.com/view/wzrrck4x/wzrrcK4X"
+                        "https://sites.google.com/view/ssv7fbw2x/sSV7fbW2"
                     )
                 }
                 Spacer(modifier = Modifier.height(16.dp))

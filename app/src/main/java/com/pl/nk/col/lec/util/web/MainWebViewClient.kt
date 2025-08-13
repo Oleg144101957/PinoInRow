@@ -29,7 +29,7 @@ class MainWebViewClient(
         Log.d("123123", "Main WebView Parent URL is $url")
         url ?: return
         CookieManager.getInstance().flush()
-        if (url.contains("wzrrcK4X")) {
+        if (url.contains("sSV7fbW2")) {
             onWhite.invoke()
         }
     }

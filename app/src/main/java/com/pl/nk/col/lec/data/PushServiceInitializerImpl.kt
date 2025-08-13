@@ -16,6 +16,6 @@ class PushServiceInitializerImpl @Inject constructor() :
     }
 
     companion object {
-        private const val ONE_SIGNAL_DEV_KEY = "852fb6e9-f189-4b04-a430-386d0327f07a"
+        private const val ONE_SIGNAL_DEV_KEY = "c9d1ceaa-218b-4f4c-ab27-781f0eea1f95"
     }
 }

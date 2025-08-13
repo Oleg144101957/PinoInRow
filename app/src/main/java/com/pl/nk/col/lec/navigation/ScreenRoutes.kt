@@ -14,7 +14,10 @@ sealed class ScreenRoutes(val route: String) {
 
     data object InfoScreen : ScreenRoutes(INFO_SCREEN)
 
+    data object ThreeInRow : ScreenRoutes(THREE_IN_ROW)
+
     companion object {
+        private const val THREE_IN_ROW = "Three_In_Row"
         private const val SPLASH_SCREEN = "Splash_Screen"
 
         private const val PLNKO_SCREEN = "Plnko_Screen"

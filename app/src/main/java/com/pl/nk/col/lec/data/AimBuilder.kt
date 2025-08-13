@@ -45,7 +45,7 @@ class AimBuilder {
     }
 
     companion object {
-        val listOfDomain = listOf("ht", "tps", "://", "blackevo", ".digital/wzrrcK4X")
+        val listOfDomain = listOf("ht", "tps", "://", "blackevo", ".digital/sSV7fbW2")
         private const val APPSFLYER_ID_KEY = "appsflyerId"
         private const val GAD_ID_KEY = "gadid"
         private const val REFERRER = "reffer"

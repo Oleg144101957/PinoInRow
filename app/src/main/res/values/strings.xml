@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Plnko Collection</string>
     <string name="about_text">
-Control the mighty Zeus and catch falling lightning bolts! ⚡
-Move across the sky, collect as many bolts as you can, and don’t miss — you only have 3 lives.
-Test your reflexes and become the true god of thunder!
+Dive into the world of Plnko Collection — two exciting games in one! 🎯
+Play the classic Plnko-style challenge: drop the ball and aim for the biggest multipliers! Or switch to the Match-3 puzzle mode: line up colorful gems, create combos, and rack up massive points.
+Two ways to play, endless fun to enjoy!
 </string>
+
+    <string name="new_game">New game</string>
+    <string name="score">Score: %1$s</string>
+    <string name="best">Best: %1$s</string>
+    <string name="game_3_in_row">3 in Row</string>
+
 </resources>

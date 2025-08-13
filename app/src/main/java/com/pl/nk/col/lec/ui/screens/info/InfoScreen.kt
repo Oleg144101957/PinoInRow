@@ -3,6 +3,7 @@ package com.pl.nk.col.lec.ui.screens.info
 import android.app.Activity
 import android.content.pm.ActivityInfo
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,7 +38,7 @@ fun InfoScreen(navController: NavController, paddingValues: PaddingValues) {
 
     val context = LocalContext.current
     val activity = context as? Activity
-    activity?.lockOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+    activity?.lockOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) // вертикальный режим
 
     Box(
         Modifier
@@ -44,48 +46,62 @@ fun InfoScreen(navController: NavController, paddingValues: PaddingValues) {
             .padding(paddingValues)
     ) {
         Background()
+
         Image(
-            painterResource(R.drawable.bg),
-            contentDescription = R.drawable.bg.toString(),
+            painter = painterResource(R.drawable.bg),
+            contentDescription = null,
             modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.FillBounds
+            contentScale = ContentScale.Crop
         )
+
         Column(
             Modifier
                 .fillMaxSize()
-                .padding(8.dp),
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
-            Box {
+            // Заголовок с обводкой и градиентом
+            Box(contentAlignment = Alignment.Center) {
                 Text(
-                    "Plnko Game",
+                    text = "Plnko Game",
                     style = TextStyle(
                         color = Color.White,
-                        fontSize = 64.sp
+                        fontSize = 48.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
                     )
                 )
                 Text(
-                    "Plnko Game",
+                    text = "Plnko Game",
                     style = TextStyle(
                         brush = Gradient,
-                        fontSize = 64.sp,
-                        drawStyle = Stroke(
-                            width = 6f, join = StrokeJoin.Round
-                        )
+                        fontSize = 48.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        drawStyle = Stroke(width = 6f, join = StrokeJoin.Round)
                     )
                 )
             }
+
+            // Описание
             Text(
-                "Place your bet and release the balls onto the board, letting gravity guide their journey. Experience the excitement with every bounce and seize your chance to collect big winnings!",
+                text = "Place your bet and release the balls onto the board, letting gravity guide their journey. Experience the excitement with every bounce and seize your chance to collect big winnings!",
                 style = TextStyle(
                     color = Color.White,
-                    fontSize = 24.sp,
+                    fontSize = 20.sp,
                     textAlign = TextAlign.Center
                 ),
-                modifier = Modifier.padding(horizontal = 32.dp)
+                modifier = Modifier
+                    .background(Color(0x5E000000))
+                    .padding(horizontal = 24.dp)
             )
-            TextButton("Close", modifier = Modifier.fillMaxWidth(0.5f)) {
+
+            // Кнопка закрытия
+            TextButton(
+                text = "Close",
+                modifier = Modifier.fillMaxWidth(0.6f)
+            ) {
                 navController.popBackStack()
             }
         }

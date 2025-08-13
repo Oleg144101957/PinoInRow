@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.pl.nk.col.lec.MainActivity
+import com.pl.nk.col.lec.R
 import com.pl.nk.col.lec.navigation.ScreenRoutes
 import com.pl.nk.col.lec.ui.custom.Background
 import com.pl.nk.col.lec.ui.custom.MenuButton
@@ -36,7 +37,7 @@ fun HomeScreen(navController: NavHostController, innerPadding: PaddingValues) {
             .padding(innerPadding),
         contentAlignment = Alignment.Center
     ) {
-        Background()
+        Background(R.drawable.bg)
         Menu(navController, activity)
     }
 }
@@ -48,10 +49,16 @@ fun Menu(navController: NavHostController, activity: MainActivity?) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        MenuButton("Play Game", modifier = Modifier) {
+        MenuButton("Play Plnko Game", modifier = Modifier) {
             navController.navigate(ScreenRoutes.PlnkoScreen.route)
         }
         Spacer(modifier = Modifier.height(16.dp))
+
+        MenuButton("Play Three In Row Game", modifier = Modifier) {
+            navController.navigate(ScreenRoutes.ThreeInRow.route)
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+
         MenuButton("Settings", modifier = Modifier) {
             navController.navigate(ScreenRoutes.SettingsScreen.route)
         }
